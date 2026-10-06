@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# Builds a Routeboy package for postmarketOS with Phosh in an Alpine podman
+# container. The package and the public key it was signed with land in dist/
+# as routeboy-pmos.apk and routeboy-pmos.rsa.pub.
+#
+#   ARCH     aarch64 (default) or x86_64
+#   ALPINE   Alpine release the phone runs: 3.24 for postmarketOS v26.06
+#            (default), edge for postmarketOS edge
+#   VERSION  package version, 0_git<commit time> by default
+#   KEYS     where the signing key is kept
+set -euo pipefail
+
+app=$(cd "$(dirname "$0")/.." && pwd)
+arch=${ARCH:-aarch64}
+alpine=${ALPINE:-3.24}
+version=${VERSION:-0_git$(git -C "$app" log -1 --format=%cd --date=format:%Y%m%d%H%M%S)}
+keys=${KEYS:-${XDG_DATA_HOME:-$HOME/.local/share}/routeboy/abuild}
+out=$app/dist
+
+die() {
+	echo "pmos: $*" >&2
+	exit 1
+}
+
+case $arch in
+aarch64) platform=linux/arm64 ;;
+x86_64) platform=linux/amd64 ;;
+*) die "unsupported ARCH $arch" ;;
+esac
+
+# Other architectures run under QEMU.
+if [ "$(uname -m)" != "$arch" ] && [ ! -e "/proc/sys/fs/binfmt_misc/qemu-$arch" ]; then
+	die "no QEMU emulation for $arch, install qemu-user-static (qemu-user-static-$arch on Fedora)"
+fi
+
+env=(-e ROUTEBOY_VERSION="$version" -e GOCACHE=/var/cache/go)
+name=$(git -C "$app" config user.name || true)
+email=$(git -C "$app" config user.email || true)
+if [ -n "$name" ] && [ -n "$email" ]; then
+	env+=(-e "PACKAGER=$name <$email>")
+fi
+
+mkdir -p "$keys" "$out"
+podman run --rm --platform "$platform" --security-opt label=disable \
+	-v "$app:/src/routeboy:ro" \
+	-v "$keys:/root/.abuild" \
+	-v "$out:/out" \
+	-v routeboy-apk-go:/var/cache/go \
+	"${env[@]}" \
+	"docker.io/library/alpine:$alpine" sh -euc '
+		apk add -U alpine-sdk
+		mkdir /build
+		cp -r /src/routeboy/scripts/apk /build/routeboy
+		cd /build/routeboy
+		# A package names the key it was signed with, and apk looks for a
+		# key of that name in /etc/apk/keys. A key made before is renamed.
+		key=/root/.abuild/routeboy-pmos.rsa
+		if [ ! -f "$key" ]; then
+			old=$(ls /root/.abuild/*.rsa 2>/dev/null | head -n 1)
+			if [ -n "$old" ]; then
+				mv "$old" "$key"
+				mv "$old.pub" "$key.pub"
+			else
+				openssl genrsa -out "$key" 4096
+				openssl rsa -in "$key" -pubout -out "$key.pub"
+			fi
+		fi
+		export PACKAGER_PRIVKEY=$key
+		cp "$key.pub" /etc/apk/keys/
+		SUDO_APK=apk REPODEST=/tmp/packages abuild -F -r
+		cp /tmp/packages/*/*/routeboy-*.apk /out/routeboy-pmos.apk
+		cp "$key.pub" /out/routeboy-pmos.rsa.pub
+	'
+
+echo "pmos: $out/routeboy-pmos.apk, version $version"

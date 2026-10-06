@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="co.rbel.routeboy"
+	android:versionCode="1"
+	android:versionName="0.1.0">
+
+	<application android:label="Routeboy" android:debuggable="true">
+	<activity android:name="org.golang.app.GoNativeActivity"
+		android:label="Routeboy"
+		android:configChanges="orientation|keyboardHidden|uiMode"
+		android:exported="true"
+		android:theme="@android:style/Theme">
+		<meta-data android:name="android.app.lib_name" android:value="routeboy" />
+		<intent-filter>
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.LAUNCHER" />
+		</intent-filter>
+	</activity>
+
+	<receiver android:name="org.golang.app.FyneNotificationReceiver"
+			  android:exported="false" />
+	</application>
+
+	<!-- GPX tracks are read from shared storage, where they are. -->
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<!-- The location button shows where you are. -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+</manifest>

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Builds a Routeboy APK for Android. It lands in dist/.
+#
+#   ARCH              arm64 (default), amd64, arm or 386
+#   TAGS              more build tags, such as autopilot
+#   ANDROID_HOME      the Android SDK, ~/Android/Sdk by default
+#   ANDROID_NDK_HOME  the NDK, the newest one in the SDK by default
+set -euo pipefail
+
+app=$(cd "$(dirname "$0")/.." && pwd)
+arch=${ARCH:-arm64}
+work=$app/dist/android
+
+die() {
+	echo "android: $*" >&2
+	exit 1
+}
+
+export ANDROID_HOME=${ANDROID_HOME:-$HOME/Android/Sdk}
+[ -d "$ANDROID_HOME" ] || die "no Android SDK in $ANDROID_HOME, set ANDROID_HOME"
+if [ -z "${ANDROID_NDK_HOME:-}" ]; then
+	ANDROID_NDK_HOME=$(find "$ANDROID_HOME/ndk" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort -V | tail -1)
+fi
+[ -n "$ANDROID_NDK_HOME" ] || die "no NDK in $ANDROID_HOME/ndk, set ANDROID_NDK_HOME"
+export ANDROID_NDK_HOME
+for tool in fyne rsvg-convert; do
+	command -v "$tool" >/dev/null || die "$tool is not installed"
+done
+
+rm -rf "$work"
+mkdir -p "$work"
+
+# The NDK has the libraries the OpenGL bindings ask pkg-config for.
+printf '#!/bin/sh\nexit 0\n' >"$work/pkg-config"
+chmod +x "$work/pkg-config"
+
+rsvg-convert -w 512 -h 512 "$app/assets/co.rbel.routeboy.svg" -o "$work/icon.png"
+
+cd "$app"
+# Newer phones have pages of 16 KiB.
+CGO_LDFLAGS=-Wl,-z,max-page-size=16384 PKG_CONFIG=$work/pkg-config GOFLAGS=-buildvcs=false \
+	fyne package --os "android/$arch" --app-id co.rbel.routeboy --name Routeboy \
+	--icon "$work/icon.png" --tags "egl${TAGS:+,$TAGS}"
+mv Routeboy.apk "dist/routeboy-$arch.apk"
+echo "dist/routeboy-$arch.apk"

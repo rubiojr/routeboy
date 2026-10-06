@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>co.rbel.routeboy</id>
+  <name>Routeboy</name>
+  <summary>Your GPX tracks on a map</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="co.rbel">
+    <name>Sergio Rubio</name>
+  </developer>
+  <description>
+    <p>Browse your GPX tracks on a map, compare elevation profiles, search
+    places and bookmark the spots you care about.</p>
+    <p>Routeboy keeps map data in a local cache so places you've already seen
+    open offline. It reads tracks from your folders without copying them.</p>
+  </description>
+  <launchable type="desktop-id">co.rbel.routeboy.desktop</launchable>
+  <url type="homepage">https://github.com/rubiojr/routeboy</url>
+  <url type="bugtracker">https://github.com/rubiojr/routeboy/issues</url>
+  <url type="vcs-browser">https://github.com/rubiojr/routeboy</url>
+  <categories>
+    <category>Utility</category>
+    <category>Maps</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <supports>
+    <control>pointing</control>
+    <control>touch</control>
+    <control>keyboard</control>
+  </supports>
+</component>

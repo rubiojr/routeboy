@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+app=$(cd "$(dirname "$0")/.." && pwd)
+build=$app/flatpak/build
+
+if [ ! -x "$build" ]; then
+	echo "flatpak: clone https://code.rbel.co/rubiojr/routeboy-flatpak.git into $app/flatpak" >&2
+	exit 1
+fi
+
+exec "$build" "$@"

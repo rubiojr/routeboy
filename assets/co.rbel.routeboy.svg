@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="case" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8ae55"/>
+      <stop offset="1" stop-color="#737a35"/>
+    </linearGradient>
+    <linearGradient id="strap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a3322"/>
+      <stop offset=".5" stop-color="#6b4a30"/>
+      <stop offset="1" stop-color="#4a3322"/>
+    </linearGradient>
+    <radialGradient id="glass" cx=".45" cy=".4" r=".75">
+      <stop offset="0" stop-color="#1f5a2a"/>
+      <stop offset="1" stop-color="#06230d"/>
+    </radialGradient>
+    <radialGradient id="brass" cx=".35" cy=".3" r=".8">
+      <stop offset="0" stop-color="#f0d98f"/>
+      <stop offset="1" stop-color="#a8873c"/>
+    </radialGradient>
+    <pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#000" opacity=".22"/>
+    </pattern>
+    <clipPath id="screen">
+      <rect x="21" y="35" width="62" height="52" rx="9"/>
+    </clipPath>
+  </defs>
+
+  <!-- strap -->
+  <path d="M32 4h44a4 4 0 0 1 4 4v112a4 4 0 0 1-4 4H32a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z" fill="url(#strap)"/>
+  <path d="M34 9v12M74 9v12M34 107v12M74 107v12" stroke="#d9b277" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+
+  <!-- antenna, bent from one fall too many -->
+  <path d="M103 24l3-11 9-5" fill="none" stroke="#3a3d1f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="116" cy="7.5" r="4.5" fill="#ff5b3a" stroke="#3a3d1f" stroke-width="2"/>
+
+  <!-- case -->
+  <rect x="8" y="24" width="112" height="86" rx="18" fill="#4b4f24"/>
+  <rect x="8" y="20" width="112" height="86" rx="18" fill="url(#case)" stroke="#3a3d1f" stroke-width="3"/>
+  <path d="M24 23.5h80" stroke="#d3d88a" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+
+  <!-- screen -->
+  <rect x="15" y="29" width="74" height="64" rx="13" fill="#2b2d18"/>
+  <rect x="21" y="35" width="62" height="52" rx="9" fill="url(#glass)"/>
+  <g clip-path="url(#screen)">
+    <path d="M31 35v52M41 35v52M51 35v52M61 35v52M71 35v52M21 45h62M21 55h62M21 65h62M21 75h62" stroke="#3f9a4e" stroke-width=".8" opacity=".45"/>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- winking eye -->
+      <path d="M58 53q7-8 14 0" stroke="#8dff9a" stroke-width="9" opacity=".2"/>
+      <path d="M58 53q7-8 14 0" stroke="#8dff9a" stroke-width="4"/>
+      <!-- the track grins -->
+      <path d="M30 67c5 10 13 14 22 13 9-1 17-7 22-17" stroke="#8dff9a" stroke-width="10" opacity=".2"/>
+      <path d="M30 67c5 10 13 14 22 13 9-1 17-7 22-17" stroke="#8dff9a" stroke-width="4"/>
+    </g>
+    <!-- the pin keeps an eye on you -->
+    <path d="M39 62c-2-4-8-7-8-13a8 8 0 0 1 16 0c0 6-6 9-8 13z" fill="#8dff9a"/>
+    <circle cx="40.5" cy="48" r="3" fill="#0b3214"/>
+    <circle cx="30" cy="67" r="3.5" fill="#8dff9a"/>
+    <circle cx="74" cy="63" r="3.5" fill="#8dff9a"/>
+    <rect x="21" y="35" width="62" height="52" fill="url(#scan)"/>
+    <path d="M27 40q14-4 30-2" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".12" fill="none"/>
+  </g>
+
+  <!-- dial -->
+  <circle cx="104" cy="48" r="12" fill="url(#brass)" stroke="#3a3d1f" stroke-width="2.5"/>
+  <path d="M104 37.5v3M104 55.5v3M93.5 48h3M111.5 48h3M96.6 40.6l2.1 2.1M109.3 53.3l2.1 2.1M96.6 55.4l2.1-2.1M109.3 42.7l2.1-2.1" stroke="#6e5626" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M104 48l5-6" stroke="#3a3d1f" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="104" cy="48" r="2.5" fill="#3a3d1f"/>
+
+  <!-- lights -->
+  <circle cx="98" cy="71" r="3.5" fill="#ff5b3a" stroke="#3a3d1f" stroke-width="1.5"/>
+  <circle cx="110" cy="71" r="3.5" fill="#8dff9a" stroke="#3a3d1f" stroke-width="1.5"/>
+
+  <!-- speaker -->
+  <path d="M95 82h18M95 88h18M95 94h18" stroke="#3a3d1f" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- duct tape holds it together -->
+  <g transform="rotate(-38 22 99)">
+    <rect x="8" y="94" width="28" height="10" rx="1" fill="#cfccbd" stroke="#8d8a7c" stroke-width="1"/>
+    <path d="M8 94l1.5 2-1.5 2 1.5 2-1.5 2 1.5 2M36 94l-1.5 2 1.5 2-1.5 2 1.5 2-1.5 2" fill="none" stroke="#8d8a7c" stroke-width="1"/>
+    <path d="M13 97h18M13 101h18" stroke="#fff" stroke-width="1" opacity=".5"/>
+  </g>
+</svg>

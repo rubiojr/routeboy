@@ -1,0 +1,85 @@
+# A tour of Routeboy, about 50 seconds long.
+#
+#   FADE_AUTOPILOT=demo/showcase.txt go run -tags autopilot .
+#
+# The script language is Fade's autopilot (docs/guide/15-scripted-demos.md
+# in Fade). The names Routeboy gives its parts (map, bar, profile, track1…)
+# are in autopilot.go. The tracks are the first two of the Tracks page, so any
+# folder will do. Keep the mouse off the window while it runs.
+
+# The map opens on Madrid.
+wait idle
+wait 2s
+
+# Look around: drag the map, spread two fingers, double tap, then zoom out.
+drag map at 0.65 0.55 by -150 70 over 1.2s
+wait idle
+wait 0.5s
+pinch map 2 over 1.2s
+wait idle
+wait 0.8s
+doubletap map at 0.4 0.45
+wait idle
+wait 0.8s
+tap icon:list-remove
+wait idle
+tap icon:list-remove
+wait idle
+wait 1s
+
+# Find a place and keep it.
+tap search
+wait 0.4s
+type "Templo de Debod"
+wait result1
+wait 1.2s
+tap "museum" in results
+wait idle
+wait 1.5s
+tap icon:star-new
+wait 1.5s
+
+# The tracks: check two, then show the second on the map.
+tap "Tracks"
+wait track2
+wait 1.2s
+tap track1
+wait 0.6s
+tap track2
+wait 1s
+tap icon:mark-location in track2
+wait idle
+wait 1.5s
+
+# The current track's details, and a walk along its elevation profile.
+tap bar
+wait profile
+wait 1s
+drag profile at 0.02 0.5 to 0.98 0.5 over 4s
+wait 1s
+drag profile at 0.98 0.5 to 0.6 0.5 over 1.5s
+wait 1s
+tap "Zoom to Track"
+wait idle
+wait 1.5s
+
+# Back to the place kept.
+tap "Bookmarks"
+wait 1.5s
+tap "Debod"
+wait idle
+wait 1.5s
+
+# Places visited, and the About page.
+tap "Places"
+wait 1.5s
+tap icon:open-menu
+wait "About Routeboy"
+wait 0.6s
+tap "About Routeboy"
+wait 2.5s
+tap icon:go-previous
+wait 0.6s
+tap "Map"
+wait idle
+wait 2s

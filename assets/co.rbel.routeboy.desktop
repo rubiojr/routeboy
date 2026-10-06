@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Routeboy
+Comment=Your GPX tracks on a map
+Exec=routeboy
+Icon=co.rbel.routeboy
+Terminal=false
+Categories=Utility;Maps;
+StartupWMClass=co.rbel.routeboy
+Keywords=GPX;Track;Route;Map;Hiking;
+X-Purism-FormFactor=Workstation;Mobile;

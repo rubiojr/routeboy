@@ -1,0 +1,25 @@
+# Built by scripts/pmos, from the Routeboy checkout it mounts at /src/routeboy.
+pkgname=routeboy
+pkgver=${ROUTEBOY_VERSION:-0}
+pkgrel=0
+pkgdesc="Your GPX tracks on a map"
+url="https://github.com/rubiojr/routeboy"
+arch="aarch64 x86_64"
+license="MIT"
+depends="ca-certificates-bundle mesa-egl mesa-gles"
+makedepends="go libxkbcommon-dev linux-headers mesa-dev wayland-dev"
+options="net !check"
+builddir=/src/routeboy
+
+build() {
+	# Alpine's Go can be older than the one go.mod asks for. Phosh is
+	# Wayland only, and the on-screen keyboard needs native Wayland.
+	GOTOOLCHAIN=auto go build -tags wayland -o "$srcdir"/routeboy .
+}
+
+package() {
+	install -Dm755 "$srcdir"/routeboy -t "$pkgdir"/usr/bin
+	install -Dm644 assets/co.rbel.routeboy.desktop -t "$pkgdir"/usr/share/applications
+	install -Dm644 assets/co.rbel.routeboy.svg -t "$pkgdir"/usr/share/icons/hicolor/scalable/apps
+	install -Dm644 LICENSE -t "$pkgdir"/usr/share/licenses/$pkgname
+}
