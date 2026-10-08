@@ -1,7 +1,9 @@
 code.rbel.co/rubiojr/fade v0.12.4 h1:OCFldzkqVq6CZM1tWc9hdPH7U1+BFczUYUh5BVkiLCc=
 code.rbel.co/rubiojr/fade v0.12.4/go.mod h1:XWvIArHCjJN77UFNNg/dxXTNKMUQRMNTRKP3hQdW+zk=
-code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261006155031-56ef5b4854a3 h1:BvT3gwxdz9LEYuMncfWKOoi0aPesDvVj+BwrO9GyqK4=
-code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261006155031-56ef5b4854a3/go.mod h1:T5Dn0JwIJOX1euPZ/iT4tq6nFYtmukjcYa7937HuYK8=
+code.rbel.co/rubiojr/fade v0.13.0 h1:Kev8x662cdiyDCrJamyunUlrRr9ZwUA761R4N0a8K5o=
+code.rbel.co/rubiojr/fade v0.13.0/go.mod h1:XWvIArHCjJN77UFNNg/dxXTNKMUQRMNTRKP3hQdW+zk=
+code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261008095649-22ae172be326 h1:OO+e+6aF9pSVaXSFU+NoMheHxKfU7Bnqx6LYJMT1+Cc=
+code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261008095649-22ae172be326/go.mod h1:T5Dn0JwIJOX1euPZ/iT4tq6nFYtmukjcYa7937HuYK8=
 code.rbel.co/rubiojr/gogps v0.1.1 h1:xictWrjIMjP28vvhCXaJR1KrwSYjHJaYHLN7xVWCrr8=
 code.rbel.co/rubiojr/gogps v0.1.1/go.mod h1:r2NJ7H4FslQhFSBsv6CFyA9COLdiulOB4z5aN9kJB58=
 fyne.io/fyne/v2 v2.8.1 h1:EztGuE2W3Qhd0cWVmU+h5rkzNezUD1To6UqsoLQYUIM=

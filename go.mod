@@ -3,7 +3,7 @@ module github.com/rubiojr/routeboy
 go 1.27.1
 
 require (
-	code.rbel.co/rubiojr/fade v0.12.4
+	code.rbel.co/rubiojr/fade v0.13.0
 	code.rbel.co/rubiojr/gogps v0.1.1
 	fyne.io/fyne/v2 v2.8.1
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef
@@ -44,4 +44,4 @@ require (
 	golang.org/x/sys v0.48.0 // indirect
 )
 
-replace github.com/go-gl/glfw/v3.4/glfw => code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261006155031-56ef5b4854a3
+replace github.com/go-gl/glfw/v3.4/glfw => code.rbel.co/rubiojr/fade/third_party/glfw-touch v0.0.0-20261008095649-22ae172be326
